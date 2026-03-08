@@ -28,7 +28,12 @@ export class SlackController {
     const channelId = payload.channel.id;
     const threadTs = payload.message.thread_ts || payload.message.ts;
 
-    await this.summarizeService.summarizeThread(channelId, threadTs);
+    // バックグラウンドで要約処理を実行（awaitを外してすぐにレスポンスを返す）
+    console.log(`要約処理を開始: channel=${channelId}, thread=${threadTs}`);
+    this.summarizeService.summarizeThread(channelId, threadTs)
+      .catch((error) => {
+        console.error('要約処理でエラーが発生しました:', error);
+      });
 
     return { ok: true };
   }
