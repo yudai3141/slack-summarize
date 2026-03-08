@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Headers, HttpCode } from '@nestjs/common';
+import { Controller, Post, Body, Headers, HttpCode, Req } from '@nestjs/common';
 import { SlackInteractionDto } from './dto/slack-interaction.dto';
 import { SlackSignatureService } from './slack-signature.service';
 import { SummarizeService } from '../summarize/summarize.service';
@@ -16,11 +16,12 @@ export class SlackController {
   async handleInteraction(
     @Body() body: SlackInteractionDto,
     @Headers() headers: Record<string, string>,
+    @Req() req: any,
   ) {
     this.slackSignatureService.verify(
       headers['x-slack-signature'],
       headers['x-slack-request-timestamp'],
-      JSON.stringify(body),
+      req.rawBody || JSON.stringify(body),
     );
 
     const payload = JSON.parse(body.payload);

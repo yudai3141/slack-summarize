@@ -19,11 +19,14 @@
     "@nestjs/core": "^11.1.16",
     "@nestjs/platform-express": "^11.1.16",
     "@slack/web-api": "^7.14.1",
+    "@vendia/serverless-express": "^4.12.6",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.16",
+    "@types/aws-lambda": "^8.10.161",
+    "@types/express": "^5.0.6",
     "@types/node": "^25.3.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
