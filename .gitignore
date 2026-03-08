@@ -1,0 +1,4 @@
+node_modules/
+outline.md
+.env
+.env.*
